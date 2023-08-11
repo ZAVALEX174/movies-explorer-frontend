@@ -1,0 +1,33 @@
+.button {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  width: 396px;
+  text-align: center;
+  border: none;
+  border-radius: 3px;
+  background: #4285f4;
+  color: #ffffff;
+  padding: 13px 0 15px;
+  cursor: pointer;
+}
+
+.button:hover {
+  transition: opacity 0.5s linear;
+  opacity: 0.5;
+}
+
+.button_disabled {
+  background: #2f2f2f;
+  pointer-events: none;
+  text-shadow: 1px 1px 15px #4285f4, 0 0 1em #4285f4, 0 0 0.2em #4285f4;
+}
+
+@media screen and (max-width: 430px) {
+  .button {
+    font-size: 12px;
+    line-height: 15px;
+    width: 260px;
+    padding-top: 15px;
+  }
+}
