@@ -61,7 +61,7 @@ const Profile = (props) => {
       <section className='profile'>
         {/* <h2 className='profile__title'>Привет, {currentUser.name}!</h2> */}
         <h2 className='profile__title'>Привет, Александр!</h2>
-        <form className='profile__form' noValidate onSubmit={handleSubmit}>
+        <form className='profile__form' onSubmit={handleSubmit}>
           <div className='profile__field'>
             <label className='profile__label'>Имя</label>
             <input
@@ -116,7 +116,7 @@ const Profile = (props) => {
                 </button>
                 <Link
                   to='/'
-                  className='profile__link_type_exit'
+                  className='profile__link-exit'
                   onClick={props.signOut}>
                   Выйти из аккаунта
                 </Link>

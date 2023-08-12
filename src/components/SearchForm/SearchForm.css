@@ -1,12 +1,13 @@
 .search {
   margin: 0 auto 10px;
+  max-width: 1140px;
   padding: 77px 0 11px;
   border-bottom: 1px solid #424242;
 }
 
 .search__form {
   margin: 0 auto;
-  max-width: 1140px;
+  /* max-width: 1140px; */
   display: flex;
   flex-wrap: wrap;
   align-content: center;
@@ -105,22 +106,17 @@
   }
 
   .search__form {
-    padding-left: 19px;
     border-radius: 9px;
-  }
-
-  .search__button {
-    margin-right: 19px;
   }
 }
 
 @media screen and (max-width: 430px) {
   .search {
     flex-direction: column;
-    max-width: 300px;
+    max-width: 420px;
     height: 121px;
     padding: 74px 0 30px;
-    margin: 0 auto 16px;
+    margin: 0 auto;
   }
 
   .search__form {
@@ -133,7 +129,7 @@
   }
 
   .search__input {
-    max-width: 238px;
+    /* max-width: 440px; */
     height: 40px;
   }
 }

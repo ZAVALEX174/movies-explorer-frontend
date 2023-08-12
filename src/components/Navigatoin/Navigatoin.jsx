@@ -41,7 +41,7 @@ const Navigatoin = ({ loggedIn }) => {
             </Link>
           </nav>
           <button
-            className='navigation__btn-nav'
+            className='navigation-close'
             type='button'
             onClick={openPopup}
           />

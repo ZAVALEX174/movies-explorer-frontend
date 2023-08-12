@@ -1,5 +1,5 @@
 .card {
-  width: 360px;
+  max-width: 360px;
   height: 231px;
   position: relative;
   list-style: none;
@@ -92,14 +92,14 @@
 }
 
 .card__poster-movie {
-  width: 360px;
+  max-width: 360px;
   height: 201px;
   border-radius: 10px;
 }
 
 @media screen and (max-width: 900px) {
   .card {
-    width: 339px;
+    max-width: 339px;
     height: 231px;
   }
 
@@ -108,19 +108,19 @@
   }
 
   .card__poster-movie {
-    width: 339px;
+    max-width: 339px;
     height: 190px;
   }
 }
 
 @media screen and (max-width: 430px) {
   .card {
-    width: 300px;
+    max-width: 300px;
     height: 199px;
   }
 
   .card__poster-movie {
-    width: 300px;
+    max-width: 300px;
     height: 168px;
   }
 

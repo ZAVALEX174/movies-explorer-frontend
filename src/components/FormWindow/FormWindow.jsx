@@ -3,7 +3,7 @@ import { Button } from '../Button/Button';
 
 const FormWindow = (props) => {
   return (
-    <form className='form' noValidate onSubmit={props.onSubmit}>
+    <form className='form' onSubmit={props.onSubmit}>
       <div className='form__container'>
         {props.children}
         <span className='form__error'>{props.errorMessage}</span>

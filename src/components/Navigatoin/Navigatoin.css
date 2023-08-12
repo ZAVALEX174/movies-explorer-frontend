@@ -53,7 +53,7 @@
   cursor: pointer;
 }
 
-.navigation__btn-nav {
+.navigation-close {
   display: none;
 }
 
@@ -70,7 +70,7 @@
     display: none;
   }
 
-  .navigation__btn-nav {
+  .navigation-close {
     display: block;
     width: 44px;
     height: 44px;
@@ -97,7 +97,7 @@
     padding: 5px 12px;
   }
 
-  .navigation__btn-nav {
+  .navigation-close {
     width: 40px;
     height: 43px;
     padding: 12px 9px;
