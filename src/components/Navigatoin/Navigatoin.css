@@ -1,0 +1,105 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin: 0;
+}
+
+.navigation__link {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.navigation__link_unregistered {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.navigation__link_active {
+  font-weight: 500;
+}
+
+.navigation__button {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 3px;
+  border: none;
+  background: #3ddc84;
+  color: #000000;
+  padding: 8px 20px;
+  cursor: pointer;
+}
+
+.navigation__links {
+  display: flex;
+  gap: 16px;
+  padding-left: 62px;
+}
+
+.navigation__btn {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  border-radius: 20px;
+  border: none;
+  background: #313131;
+  color: #ffffff;
+  padding: 8px 20px;
+  cursor: pointer;
+}
+
+.navigation-close {
+  display: none;
+}
+
+.navigation__link:hover,
+.navigation__button:hover,
+.navigation__btn:hover {
+  transition: opacity 0.5s linear;
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation__links,
+  .navigation__btn {
+    display: none;
+  }
+
+  .navigation-close {
+    display: block;
+    width: 44px;
+    height: 44px;
+    border: none;
+    cursor: pointer;
+    background: #202020;
+    border-radius: 0;
+    padding: 8px 11px;
+    background-image: url('../../Images/iconBurger.svg');
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .navigation {
+    gap: 14px;
+  }
+
+  .navigation__link_unregistered {
+    font-size: 10px;
+  }
+
+  .navigation__button {
+    font-size: 10px;
+    padding: 5px 12px;
+  }
+
+  .navigation-close {
+    width: 40px;
+    height: 43px;
+    padding: 12px 9px;
+  }
+}

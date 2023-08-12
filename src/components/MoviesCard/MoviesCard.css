@@ -1,0 +1,130 @@
+.card {
+  max-width: 360px;
+  height: 231px;
+  position: relative;
+  list-style: none;
+}
+
+.card__description-movie {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px 14px 12px;
+}
+
+.card__name-movie {
+  width: 85%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  color: #ffffff;
+}
+
+.card__duration-movie {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #8b8b8b;
+  border: none;
+  border-radius: 3px;
+  background-color: #2f2f2f;
+  width: 52px;
+  height: 18px;
+}
+
+.card__button {
+  position: absolute;
+  width: 71px;
+  height: 21px;
+  top: 14px;
+  right: 14px;
+  background: #222222;
+  background-image: url(../../Images/text__COLOR_font-main.svg);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  border: none;
+  border-radius: 30px;
+  padding: 6px 7px;
+  cursor: pointer;
+}
+
+.card__button_saved {
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  top: 14px;
+  right: 14px;
+  background-color: #222222;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border: none;
+  border-radius: 50px;
+  padding: 0;
+  cursor: pointer;
+  background-image: url(../../Images/save3.svg);
+}
+
+.card__button_delete {
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  top: 14px;
+  right: 14px;
+  background-color: #222222;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border: none;
+  border-radius: 50px;
+  padding: 0;
+  cursor: pointer;
+  background-image: url(../../Images/deliteSaveCard.svg);
+}
+
+.card__button:hover {
+  transition: opacity 0.5s linear;
+  opacity: 0.5;
+}
+
+.card__poster-movie {
+  width: 100%;
+  height: 201px;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 900px) {
+  .card {
+    max-width: 339px;
+    height: 231px;
+  }
+
+  .card__description-movie {
+    padding-top: 20px;
+  }
+
+  .card__poster-movie {
+  width: 100%;
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .card {
+    max-width: 300px;
+    height: 199px;
+  }
+
+  .card__poster-movie {
+    width: 100%;
+    height: 168px;
+  }
+
+  .card__description-movie {
+    padding: 14px 0 14px 15px;
+  }
+}
