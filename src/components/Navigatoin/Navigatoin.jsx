@@ -21,14 +21,14 @@ const Navigatoin = ({ loggedIn }) => {
             <nav className='navigation__links'>
               <NavLink
                 to='/movies'
-                className='navigation__link'
-                activeClassName='navigation__link_active'>
+                className='navigation__link navigation__link_active'
+               >
                 Фильмы
               </NavLink>
               <NavLink
                 to='/saved-movies'
-                className='navigation__link'
-                activeClassName='navigation__link_active'>
+                className='navigation__link navigation__link_active'
+               >
                 Сохранённые фильмы
               </NavLink>
             </nav>

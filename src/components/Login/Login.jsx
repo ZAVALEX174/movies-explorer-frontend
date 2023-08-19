@@ -24,7 +24,7 @@ const Login = (props) => {
     if (!values.password || !values.email) {
       return;
     }
-    // props.onLogin(values);
+    props.onLogin(values);
     resetForm();
   }
 
@@ -62,7 +62,7 @@ const Login = (props) => {
           value={values.password || ''}
           error={errors.password || ''}
           onChange={handleChange}
-          pattern='.{8,}'
+          pattern='.{6,}'
         />
       </FormWindow>
     </AuthorizationForm>

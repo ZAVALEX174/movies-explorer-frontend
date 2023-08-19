@@ -3,7 +3,6 @@ import React from 'react';
 import { SearchForm } from '../SearchForm/SearchForm';
 import { Preloader } from '../Preloader/Preloader';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
-import movies from '../../utils/movies';
 
 const Movies = (props) => {
   function toggleHeader() {
@@ -33,12 +32,13 @@ const Movies = (props) => {
         ) : (
           <MoviesCardList
             isMoviesPage={true}
-            movies={movies}
-            // isNotFound={props.isNotFound}
-            // isServerError={props.isServerError}
-            // onSaveMovie={props.onSaveMovie}
+            movies={props.movies}
+            isNotFound={props.isNotFound}
+            isServerError={props.isServerError}
+            onSaveMovie={props.onSaveMovie}
             isSavedMovies={props.isSavedMovies}
-            // savedMovies={props.savedMovies}
+            savedMovies={props.savedMovies}
+            onDeleteMovie={props.onDeleteMovie}
           />
         )}
       </main>

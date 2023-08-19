@@ -1,7 +1,6 @@
 import './MoviesCard.css';
 import { convertDuration } from '../../utils/ConvertDuration';
 import { useLocation } from 'react-router-dom';
-import movies from '../../utils/movies';
 
 const MoviesCard = ({
   movie,
@@ -13,17 +12,17 @@ const MoviesCard = ({
   const location = useLocation();
 
   const handleSaveMovie = () => {
-    // onSaveMovie(movie); // на след этапе
+    onSaveMovie(movie); 
   };
 
   const handleDeleteMovie = () => {
-    // onDeleteMovie(movie); // на след этапе
+    onDeleteMovie(movie); 
   };
 
   return (
     <li className='card'>
       <a
-        href={movies.trailerLink}
+        href={movie.trailerLink}
         className='card__trailer-link'
         target='_blank'
         rel='noreferrer'>
@@ -36,7 +35,7 @@ const MoviesCard = ({
         )}
         {location.pathname === '/saved-movies' && (
           <img
-            src={`https://api.nomoreparties.co/${movie.image.url}`}
+            src={movie.thumbnail}
             alt={movie.nameRU}
             className='card__poster-movie'
           />

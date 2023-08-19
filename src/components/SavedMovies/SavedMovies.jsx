@@ -2,7 +2,6 @@ import './SavedMovies.css';
 import React from 'react';
 import { SearchForm } from '../SearchForm/SearchForm';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
-import moviesSave from '../../utils/moviesSave';
 
 const SavedMovies = (props) => {
   function toggleHeader() {
@@ -24,10 +23,12 @@ const SavedMovies = (props) => {
         checked={props.checked}
       />
       <MoviesCardList
-        movies={moviesSave}
+        movies={props.movies}
         isMoviesPage={false}
         isSavedMovies={props.isSavedMovies}
         savedMovies={props.savedMovies}
+        onDeleteMovie={props.onDeleteMovie}
+        isNotFound={props.isNotFound}
       />
     </main>
   );
