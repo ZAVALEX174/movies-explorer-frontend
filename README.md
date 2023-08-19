@@ -22,4 +22,4 @@
 
 # ссылка на pull request:
 
-[ссылка на pull request] ()
+[ссылка на pull request] (https://github.com/ZAVALEX174/movies-explorer-frontend/pull/2)
