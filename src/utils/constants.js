@@ -1,5 +1,5 @@
-export const BASE_URL = 'api.zuevdiplom.nomoredomains.xyz';
-// export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'https://api.zuevdiplom.nomoredomains.xyz';
+//export const BASE_URL = 'http://localhost:3000';
 export const MOVIE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
 export const checkResponse = (res) => {
@@ -24,14 +24,14 @@ const MORE_CARDS_2 = 2;
 const MORE_CARDS_1 = 2;
 
 export {
-   MAX_WIDTH_1280,
-   MIDDLE_WIDTH_768,
-   MIN_WIDTH_480,
-   INITIAL_CARDS_12,
-   INITIAL_CARDS_8,
-   INITIAL_CARDS_6,
-   IINITIAL_CARDS_5,
-   MORE_CARDS_3,
-   MORE_CARDS_2,
-   MORE_CARDS_1
+    MAX_WIDTH_1280,
+    MIDDLE_WIDTH_768,
+    MIN_WIDTH_480,
+    INITIAL_CARDS_12,
+    INITIAL_CARDS_8,
+    INITIAL_CARDS_6,
+    IINITIAL_CARDS_5,
+    MORE_CARDS_3,
+    MORE_CARDS_2,
+    MORE_CARDS_1
 };
