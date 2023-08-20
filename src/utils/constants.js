@@ -10,8 +10,8 @@ export const checkResponse = (res) => {
 };
 
 // Переменные ширины экрана
-const MAX_WIDTH_1280 = 1280;
-const MIDDLE_WIDTH_768 = 768;
+const MAX_WIDTH_1161 = 1161;
+const MIDDLE_WIDTH_768 = 1160;
 const MIN_WIDTH_480 = 480;
 // количество отображаемых фильмов, в зависимости от ширины
 const INITIAL_CARDS_12 = 12;
@@ -24,7 +24,7 @@ const MORE_CARDS_2 = 2;
 const MORE_CARDS_1 = 2;
 
 export {
-    MAX_WIDTH_1280,
+    MAX_WIDTH_1161,
     MIDDLE_WIDTH_768,
     MIN_WIDTH_480,
     INITIAL_CARDS_12,

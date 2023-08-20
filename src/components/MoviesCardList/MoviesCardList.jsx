@@ -3,7 +3,7 @@ import { MoviesCard } from '../MoviesCard/MoviesCard';
 import { useState, useEffect } from 'react';
 import { useWindowSize } from '../Hooks/useWindowsSize';
 import {
-   MAX_WIDTH_1280,
+   MAX_WIDTH_1161,
    MIDDLE_WIDTH_768,
    MIN_WIDTH_480,
    INITIAL_CARDS_12,
@@ -29,11 +29,11 @@ const MoviesCardList = ({
   const windowWidth = useWindowSize();
 
   useEffect(() => {
-    if (windowWidth >= MAX_WIDTH_1280) {
+    if (windowWidth >= MAX_WIDTH_1161) {
        setInitialCards(INITIAL_CARDS_12);
        setMoreCards(MORE_CARDS_3);
     }
-    if (windowWidth < MAX_WIDTH_1280 && windowWidth >= MIDDLE_WIDTH_768) {
+    if (windowWidth < MAX_WIDTH_1161 && windowWidth >= MIDDLE_WIDTH_768) {
        setInitialCards(INITIAL_CARDS_8);
        setMoreCards(MORE_CARDS_2);
     }
