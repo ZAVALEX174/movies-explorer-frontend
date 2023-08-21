@@ -29,7 +29,7 @@ const SearchForm = ({ onCheckbox, checked, onSubmit, defaultValue }) => {
 
   return (
     <section className='search'>
-      <form className='search__form' onSubmit={handleSubmit}>
+      <form className='search__form' onSubmit={handleSubmit}  noValidate>
         <div className='search__form-wrapper'>
           <input
             className='search__input'

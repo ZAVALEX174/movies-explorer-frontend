@@ -344,7 +344,7 @@ function App() {
 
   // функция выхода
   function signOut() {
-    // localStorage.clear();
+    localStorage.clear();
     localStorage.removeItem('jwt');
     setLoggedIn(false);
     navigate('/');

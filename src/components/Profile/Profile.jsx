@@ -69,7 +69,7 @@ const Profile = (props) => {
               name='name'
               type='text'
               minLength='2'
-              maxLength='30'             
+              maxLength='30'
               required
               disabled={isDisabledInput}
               value={values?.name ?? currentUser.name}
@@ -88,12 +88,14 @@ const Profile = (props) => {
               id='profile-email'
               className='profile__input'
               name='email'
-              type='email'
+              type='text'
               required
               disabled={isDisabledInput}
               value={values?.email ?? currentUser.email}
               onChange={handleChange}
-              pattern='[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
+              // pattern='[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
+              // pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
+              pattern='^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$'
               // defaultValue={defaultEmail}
             />
           </div>

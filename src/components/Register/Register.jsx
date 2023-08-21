@@ -58,7 +58,7 @@ const Register = (props) => {
           id='email'
           label='E-mail'
           name='email'
-          type='email'
+          type='text'
           minLength='6'
           maxLength='40'
           required
@@ -66,7 +66,9 @@ const Register = (props) => {
           value={values.email || ''}
           error={errors.email || ''}
           onChange={handleChange}
-          pattern='[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
+          // pattern='[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
+          // psttern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
+          pattern='^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$'          
         />
 
         <AuthorizationField
@@ -79,7 +81,7 @@ const Register = (props) => {
           value={values.password || ''}
           error={errors.password || ''}
           onChange={handleChange}
-          pattern='.{6,}'
+          pattern='.{8,}'
         />
       </FormWindow>
     </AuthorizationForm>
