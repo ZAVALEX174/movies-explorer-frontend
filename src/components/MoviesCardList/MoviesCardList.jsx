@@ -63,7 +63,7 @@ const MoviesCardList = ({
     <section className='cards'>
       {isMoviesPage ? (
         <>
-          <p className={classIsNotFound}>Ничего не найдено.</p>
+          <p className={classIsNotFound}>Ничего1 не найдено.</p>
           <p className={classServerError}>
             Во время запроса произошла ошибка. Возможно, проблема с соединением
             или сервер недоступен. Подождите немного и попробуйте ещё раз.
@@ -97,7 +97,7 @@ const MoviesCardList = ({
         </>
       ) : (
         <>
-          <p className={classIsNotFound}>Ничего не найдено.</p>
+          <p className={classIsNotFound}>Ничего2 не найдено.</p>
           <p className={classServerError}>
             Во время запроса произошла ошибка. Возможно, проблема с соединением
             или сервер недоступен. Подождите немного и попробуйте ещё раз.

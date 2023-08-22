@@ -97,7 +97,8 @@
 
 @media screen and (max-width: 550px) {
   .search__form-error {
-    left: 19px;
+    left: 0px;
+    bottom: -18px;
   }
 
   .search__input {
@@ -131,5 +132,9 @@
   .search__input {
     /* max-width: 440px; */
     height: 40px;
+  }
+
+  .search__form-error {
+    left: 4px;
   }
 }

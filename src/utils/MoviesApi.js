@@ -13,7 +13,7 @@ class MoviesApi {
     }
   }
 
-  // получение всех фильмой с api
+  // получение всех фильмой с api //getMovies
   getAllMovies() {
     return fetch(`${this._baseUrl}/beatfilm-movies`, {
       method: 'GET',

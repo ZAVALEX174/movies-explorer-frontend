@@ -35,7 +35,7 @@ function App() {
   const [isShowHeader, setIsShowHeader] = useState(true); // нужно ли показать шапку
   const [isShowFooter, setIsShowFooter] = useState(true); // нужно ли показать подвал
 
-  // состояния по фильмам
+  // // состояния по фильмам
   const [allMovies, setAllMovies] = useState([]); // Данные всех фильмов
   const [initialMovies, setInitialMovies] = useState([]); // Список найденных фильмов
   const [foundMovies, setFoundMovies] = useState([]); // Список фильмов по критериям
@@ -43,7 +43,7 @@ function App() {
   const [allSavedMovies, setAllSavedMovies] = useState(savedMovies);
   const [filteredMovies, setFilteredMovies] = useState(allSavedMovies);
 
-  // состояния для формы поиска фильмов
+  // // состояния для формы поиска фильмов
   const [selectedCheckbox, setSelectedCheckbox] = useState(false); // Флажок короткометражек не выбран
   const [searchKeyword, setSearchKeyword] = useState(''); // Ключевое слово
   const [checkboxSavedMovies, setCheckboxSavedMovies] = useState(false);
@@ -61,8 +61,8 @@ function App() {
   function toggleFooter(state) {
     setIsShowFooter(state);
   }
-               
-  // находим фильмы по ключевому слову
+
+  // // находим фильмы по ключевому слову
   const findMovies = (movies, keyword, checkbox) => {
     const moviesКeywordSearch = movies.filter((movie) => {
       return (
@@ -77,21 +77,14 @@ function App() {
     }
   };
 
-  // Поиск короткометражныx фильмов
+  // // Поиск короткометражныx фильмов
   const searchShortMovies = (movies) => {
     return movies.filter((movie) => movie.duration <= 40);
   };
 
-  // Отслеживаем наличие сохраненных фильмов
-  useEffect(() => {
-    if (savedMovies.length !== 0) {
-      setIsNotFound(false);
-    } else {
-      setIsNotFound(true);
-    }
-  }, [savedMovies]);
+  
 
-  // Отслеживание состояние стэйта чекбокса
+  // // Отслеживание состояние стэйта чекбокса
   useEffect(() => {
     if (localStorage.getItem('checkboxSavedMovies') === 'true') {
       setCheckboxSavedMovies(true);
@@ -102,16 +95,16 @@ function App() {
     }
   }, [savedMovies]);
 
-  // Меняем состояние чекбокса на короткометражки
+  // // Меняем состояние чекбокса на короткометражки
   function handleChangeCheckboxSavedMovies() {
     if (!checkboxSavedMovies) {
       setCheckboxSavedMovies(true);
       localStorage.setItem('checkboxSavedMovies', true);
       setAllSavedMovies(searchShortMovies(filteredMovies));
       if (searchShortMovies(filteredMovies).length === 0) {
-        setIsNotFound(true);
+        setIsNotFound(true); //true
       }
-      setIsNotFound(false);
+      setIsNotFound(false); // false
     } else {
       setCheckboxSavedMovies(false);
       localStorage.setItem('checkboxSavedMovies', false);
@@ -123,7 +116,7 @@ function App() {
     }
   }
 
-  // Поиск фильмов из сохраненных ранее по ключевому слову
+  // // Поиск фильмов из сохраненных ранее по ключевому слову
   function handleSearchSavedMovies(keyword) {
     if (findMovies(savedMovies, keyword, checkboxSavedMovies).length === 0) {
       setIsNotFound(true);
@@ -134,7 +127,7 @@ function App() {
     }
   }
 
-  // Отслеживание состояния стэйтов
+  // // Отслеживание состояния стэйтов
   useEffect(() => {
     setSearchKeyword(localStorage.getItem('searchKeyword' || ''));
     setSelectedCheckbox(
@@ -151,7 +144,7 @@ function App() {
     }
   }, []);
 
-  // Меняем состояние чекбокса на короткометражки
+  // // Меняем состояние чекбокса на короткометражки
   const handleChangeCheckbox = () => {
     setSelectedCheckbox(!selectedCheckbox);
     console.log(selectedCheckbox);
@@ -166,7 +159,7 @@ function App() {
     localStorage.setItem('selectedCheckbox', !selectedCheckbox);
   };
 
-  // Найдем фильмы по критериям
+  // // Найдем фильмы по критериям
   const handleSetFoundMovies = (movies, keyword, checkbox) => {
     setIsLoading(true);
     const moviesList = findMovies(movies, keyword, false);
@@ -181,15 +174,26 @@ function App() {
     setTimeout(() => setIsLoading(false), 1000);
   };
 
-  // Проверить сохранен ли фильм
+  // // Проверить сохранен ли фильм
   const isSavedMovies = (movie) => {
     return savedMovies.some(
       (item) => item.movieId === movie.id && item.owner === currentUser._id
     );
   };
 
-  // запрос пользователя по поиску фильмов
+  // // запрос пользователя по поиску фильмов
   const handleRequestMovies = (keyword) => {
+
+// Отслеживаем наличие сохраненных фильмов
+  // useEffect(() => {
+  //   if (savedMovies.length !== 0) {
+  //     setIsNotFound(false);
+  //     console.log(setIsNotFound)
+  //   } else {
+  //     setIsNotFound(true);
+  //   }
+  // }, [savedMovies]);
+
     localStorage.setItem('searchKeyword', keyword); // Записываем в сторедж введенное ключевое слово
     localStorage.setItem('selectedCheckbox', selectedCheckbox); // Записываем в сторедж выставленное положение флажка
     if (allMovies.length === 0) {
@@ -214,7 +218,9 @@ function App() {
     }
   };
 
-  // сохранение фильма на страницу "Сохраненные фильмы"
+  
+
+  // // сохранение фильма на страницу "Сохраненные фильмы"
   const handleSaveMovie = (movie) => {
     const jwt = localStorage.getItem('jwt');
     mainApi
@@ -227,7 +233,7 @@ function App() {
       });
   };
 
-  // удаление фильма с страницы "Сохраненные фильмы"
+  // // удаление фильма с страницы "Сохраненные фильмы"
   function handleDeleteMovie(movie) {
     const jwt = localStorage.getItem('jwt');
     const deleteCard = savedMovies.find(
@@ -246,7 +252,7 @@ function App() {
       });
   }
 
-  // Регистрация пользователя
+  // // Регистрация пользователя
   const handleRegistration = ({ name, email, password }) => {
     mainApi
       .register({ name, email, password })
@@ -266,7 +272,7 @@ function App() {
       });
   };
 
-  // Авторизация пользователя
+  // // Авторизация пользователя
   const handleAuthorization = ({ email, password }) => {
     mainApi
       .authorize({ email, password })
@@ -293,7 +299,7 @@ function App() {
       });
   };
 
-  // Проверяем токен пользователя и получение его контента
+  // // Проверяем токен пользователя и получение его контента
   const handleTokenCheck = () => {
     const token = localStorage.getItem('jwt');
     if (!token) {
@@ -319,7 +325,7 @@ function App() {
       });
   };
 
-  // Изменить данные пользователя в профиле
+  // // Изменить данные пользователя в профиле
   const handleUpdateUserData = (data) => {
     const jwt = localStorage.getItem('jwt');
     mainApi
