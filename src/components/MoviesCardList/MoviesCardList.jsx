@@ -3,16 +3,16 @@ import { MoviesCard } from '../MoviesCard/MoviesCard';
 import { useState, useEffect } from 'react';
 import { useWindowSize } from '../Hooks/useWindowsSize';
 import {
-   MAX_WIDTH_1161,
-   MIDDLE_WIDTH_768,
-   MIN_WIDTH_480,
-   INITIAL_CARDS_12,
-   INITIAL_CARDS_8,
-   INITIAL_CARDS_6,
-   IINITIAL_CARDS_5,
-   MORE_CARDS_3,
-   MORE_CARDS_2,
-   MORE_CARDS_1
+  MAX_WIDTH_1161,
+  MIDDLE_WIDTH_768,
+  MIDDLE_WIDTH_730,
+  MIDDLE_WIDTH_731,
+  MIN_WIDTH_480,
+  INITIAL_CARDS_12,
+  INITIAL_CARDS_8,
+  IINITIAL_CARDS_5,
+  MORE_CARDS_3,
+  MORE_CARDS_2,
 } from '../../utils/constants';
 
 const MoviesCardList = ({
@@ -30,22 +30,22 @@ const MoviesCardList = ({
 
   useEffect(() => {
     if (windowWidth >= MAX_WIDTH_1161) {
-       setInitialCards(INITIAL_CARDS_12);
-       setMoreCards(MORE_CARDS_3);
+      setInitialCards(INITIAL_CARDS_12);
+      setMoreCards(MORE_CARDS_3);
     }
-    if (windowWidth < MAX_WIDTH_1161 && windowWidth >= MIDDLE_WIDTH_768) {
-       setInitialCards(INITIAL_CARDS_8);
-       setMoreCards(MORE_CARDS_2);
+    if (windowWidth < MAX_WIDTH_1161 && windowWidth >= MIDDLE_WIDTH_731) {
+      setInitialCards(INITIAL_CARDS_8);
+      setMoreCards(MORE_CARDS_2);
     }
-    if (windowWidth < MIDDLE_WIDTH_768 && windowWidth >= MIN_WIDTH_480) {
-       setInitialCards(INITIAL_CARDS_6);
-       setMoreCards(MORE_CARDS_2);
+    if (windowWidth <= MIDDLE_WIDTH_730 && windowWidth >= MIN_WIDTH_480) {
+      setInitialCards(IINITIAL_CARDS_5);
+      setMoreCards(MORE_CARDS_2);
     }
     if (windowWidth < MIN_WIDTH_480) {
-       setInitialCards(IINITIAL_CARDS_5);
-       setMoreCards(MORE_CARDS_1);
+      setInitialCards(IINITIAL_CARDS_5);
+      setMoreCards(MORE_CARDS_2);
     }
- }, [windowWidth])
+  }, [windowWidth]);
 
   let classIsNotFound = isNotFound
     ? 'cards__missing_visible'
@@ -63,7 +63,7 @@ const MoviesCardList = ({
     <section className='cards'>
       {isMoviesPage ? (
         <>
-          <p className={classIsNotFound}>Ничего1 не найдено.</p>
+          <p className={classIsNotFound}>Ничего не найдено.</p>
           <p className={classServerError}>
             Во время запроса произошла ошибка. Возможно, проблема с соединением
             или сервер недоступен. Подождите немного и попробуйте ещё раз.
@@ -72,7 +72,7 @@ const MoviesCardList = ({
             {movies.slice(0, initialCards).map((movie, i) => {
               return (
                 <MoviesCard
-                movie={movie}
+                  movie={movie}
                   key={movie.id}
                   onDeleteMovie={onDeleteMovie}
                   onSaveMovie={onSaveMovie}
@@ -97,7 +97,7 @@ const MoviesCardList = ({
         </>
       ) : (
         <>
-          <p className={classIsNotFound}>Ничего2 не найдено.</p>
+          <p className={classIsNotFound}>Ничего не найдено.</p>
           <p className={classServerError}>
             Во время запроса произошла ошибка. Возможно, проблема с соединением
             или сервер недоступен. Подождите немного и попробуйте ещё раз.

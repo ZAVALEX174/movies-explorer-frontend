@@ -1,5 +1,5 @@
-export const BASE_URL = 'https://api.zuevdiplom.nomoredomains.xyz';
-// export const BASE_URL = 'http://localhost:3000';
+// export const BASE_URL = 'https://api.zuevdiplom.nomoredomains.xyz';
+export const BASE_URL = 'http://localhost:3000';
 export const MOVIE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
 export const checkResponse = (res) => {
@@ -12,6 +12,8 @@ export const checkResponse = (res) => {
 // Переменные ширины экрана
 const MAX_WIDTH_1161 = 1161;
 const MIDDLE_WIDTH_768 = 1160;
+const MIDDLE_WIDTH_730 = 730;
+const MIDDLE_WIDTH_731 = 731;
 const MIN_WIDTH_480 = 480;
 // количество отображаемых фильмов, в зависимости от ширины
 const INITIAL_CARDS_12 = 12;
@@ -26,6 +28,8 @@ const MORE_CARDS_1 = 2;
 export {
     MAX_WIDTH_1161,
     MIDDLE_WIDTH_768,
+    MIDDLE_WIDTH_730,
+    MIDDLE_WIDTH_731,
     MIN_WIDTH_480,
     INITIAL_CARDS_12,
     INITIAL_CARDS_8,
