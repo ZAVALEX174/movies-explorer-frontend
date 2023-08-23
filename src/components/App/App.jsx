@@ -35,7 +35,7 @@ function App() {
   const [isShowHeader, setIsShowHeader] = useState(true); // нужно ли показать шапку
   const [isShowFooter, setIsShowFooter] = useState(true); // нужно ли показать подвал
 
-  // // состояния по фильмам
+  // состояния по фильмам
   const [allMovies, setAllMovies] = useState([]); // Данные всех фильмов
   const [initialMovies, setInitialMovies] = useState([]); // Список найденных фильмов
   const [foundMovies, setFoundMovies] = useState([]); // Список фильмов по критериям
@@ -43,7 +43,7 @@ function App() {
   const [allSavedMovies, setAllSavedMovies] = useState(savedMovies);
   const [filteredMovies, setFilteredMovies] = useState(allSavedMovies);
 
-  // // состояния для формы поиска фильмов
+  // состояния для формы поиска фильмов
   const [selectedCheckbox, setSelectedCheckbox] = useState(false); // Флажок короткометражек не выбран
   const [searchKeyword, setSearchKeyword] = useState(''); // Ключевое слово
   const [checkboxSavedMovies, setCheckboxSavedMovies] = useState(false);
@@ -61,6 +61,47 @@ function App() {
   function toggleFooter(state) {
     setIsShowFooter(state);
   }
+
+  // // запрос пользователя по поиску фильмов
+  const handleRequestMovies = (keyword) => {
+    localStorage.setItem('searchKeyword', keyword); // Записываем в сторедж введенное ключевое слово
+    localStorage.setItem('selectedCheckbox', selectedCheckbox); // Записываем в сторедж выставленное положение флажка
+    if (allMovies.length === 0) {
+      // если фильмов в localStorage нет, сделаем запрос к BeatfilmMoviesApi
+      setIsLoading(true);
+      moviesApi
+        .getAllMovies()
+        .then((movies) => {
+          setIsLoading(true);
+          localStorage.setItem('allMovies', JSON.stringify(movies)); // Записываем в сторедж все полученные фильмы с BeatfilmMoviesApi
+          setAllMovies(movies);
+          handleSetFoundMovies(movies, keyword, selectedCheckbox); // Находим фильмы по запросу и выставленным критериям
+        })
+        .catch((err) => {
+          setIsServerError(true);
+        })
+        .finally(() => {
+          setTimeout(() => setIsLoading(false), 1000);
+        });
+    } else {
+      handleSetFoundMovies(allMovies, keyword, selectedCheckbox);
+    }
+  };
+
+  // // Найдем фильмы по критериям
+  const handleSetFoundMovies = (movies, keyword, checkbox) => {
+    setIsLoading(true);
+    const moviesList = findMovies(movies, keyword, false);
+    if (moviesList.length === 0) {
+      setIsNotFound(true);
+    } else {
+      setIsNotFound(false);
+    }
+    setInitialMovies(moviesList);
+    setFoundMovies(checkbox ? searchShortMovies(moviesList) : moviesList);
+    localStorage.setItem('foundMovies', JSON.stringify(moviesList));
+    setTimeout(() => setIsLoading(false), 1000);
+  };
 
   // // находим фильмы по ключевому слову
   const findMovies = (movies, keyword, checkbox) => {
@@ -81,8 +122,6 @@ function App() {
   const searchShortMovies = (movies) => {
     return movies.filter((movie) => movie.duration <= 40);
   };
-
-  
 
   // // Отслеживание состояние стэйта чекбокса
   useEffect(() => {
@@ -159,66 +198,12 @@ function App() {
     localStorage.setItem('selectedCheckbox', !selectedCheckbox);
   };
 
-  // // Найдем фильмы по критериям
-  const handleSetFoundMovies = (movies, keyword, checkbox) => {
-    setIsLoading(true);
-    const moviesList = findMovies(movies, keyword, false);
-    if (moviesList.length === 0) {
-      setIsNotFound(true);
-    } else {
-      setIsNotFound(false);
-    }
-    setInitialMovies(moviesList);
-    setFoundMovies(checkbox ? searchShortMovies(moviesList) : moviesList);
-    localStorage.setItem('foundMovies', JSON.stringify(moviesList));
-    setTimeout(() => setIsLoading(false), 1000);
-  };
-
   // // Проверить сохранен ли фильм
   const isSavedMovies = (movie) => {
     return savedMovies.some(
       (item) => item.movieId === movie.id && item.owner === currentUser._id
     );
   };
-
-  // // запрос пользователя по поиску фильмов
-  const handleRequestMovies = (keyword) => {
-
-// Отслеживаем наличие сохраненных фильмов
-  // useEffect(() => {
-  //   if (savedMovies.length !== 0) {
-  //     setIsNotFound(false);
-  //     console.log(setIsNotFound)
-  //   } else {
-  //     setIsNotFound(true);
-  //   }
-  // }, [savedMovies]);
-
-    localStorage.setItem('searchKeyword', keyword); // Записываем в сторедж введенное ключевое слово
-    localStorage.setItem('selectedCheckbox', selectedCheckbox); // Записываем в сторедж выставленное положение флажка
-    if (allMovies.length === 0) {
-      // если фильмов в localStorage нет, сделаем запрос к BeatfilmMoviesApi
-      setIsLoading(true);
-      moviesApi
-        .getAllMovies()
-        .then((movies) => {
-          setIsLoading(true);
-          localStorage.setItem('allMovies', JSON.stringify(movies)); // Записываем в сторедж все полученные фильмы с BeatfilmMoviesApi
-          setAllMovies(movies);
-          handleSetFoundMovies(movies, keyword, selectedCheckbox); // Находим фильмы по запросу и выставленным критериям
-        })
-        .catch((err) => {
-          setIsServerError(true);
-        })
-        .finally(() => {
-          setTimeout(() => setIsLoading(false), 1000);
-        });
-    } else {
-      handleSetFoundMovies(allMovies, keyword, selectedCheckbox);
-    }
-  };
-
-  
 
   // // сохранение фильма на страницу "Сохраненные фильмы"
   const handleSaveMovie = (movie) => {
