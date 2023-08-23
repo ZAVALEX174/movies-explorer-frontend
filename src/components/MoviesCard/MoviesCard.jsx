@@ -1,5 +1,5 @@
 import './MoviesCard.css';
-import { convertDuration } from '../../utils/ConvertDuration';
+import { CONVERT_DURATION } from '../../utils/constants';
 import { useLocation } from 'react-router-dom';
 
 const MoviesCard = ({
@@ -44,7 +44,7 @@ const MoviesCard = ({
       <div className='card__description-movie'>
         <span className='card__name-movie'>{movie.nameRU}</span>
         <span className='card__duration-movie'>
-          {convertDuration(movie.duration)}
+          {CONVERT_DURATION(movie.duration)}
         </span>
       </div>
 
