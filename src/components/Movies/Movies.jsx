@@ -26,6 +26,9 @@ const Movies = (props) => {
           onCheckbox={props.onCheckbox}
           checked={props.checked}
           defaultValue={props.searchKeyword}
+          location={props.location}
+          searchKeyword={props.searchKeyword}
+          onChange={props.updateSaerchValue}
         />
         {props.isLoading ? (
           <Preloader />
@@ -39,6 +42,7 @@ const Movies = (props) => {
             isSavedMovies={props.isSavedMovies}
             savedMovies={props.savedMovies}
             onDeleteMovie={props.onDeleteMovie}
+
           />
         )}
       </main>

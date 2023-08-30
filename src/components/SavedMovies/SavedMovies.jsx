@@ -1,5 +1,5 @@
 import './SavedMovies.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { SearchForm } from '../SearchForm/SearchForm';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 
@@ -15,12 +15,28 @@ const SavedMovies = (props) => {
     toggleFooter();
   }, []);
 
+  // React.useEffect(() => {
+  //   setCurrentSavedMovies(props.movies);
+
+  //   updateCurrentMovies();
+  // }, [props.movies]);
+
+  // React.useEffect(() => {
+  //   console.log(currentSavedMovies);
+  // }, [currentSavedMovies]);
+
+  // console.log(props.movies);
+
   return (
     <main className='saved-movies'>
       <SearchForm
-        onSubmit={props.onSubmit}
+        allMovies={props.allMovies}
+        onSubmit={props.updateCurrentMovies}
         onCheckbox={props.onCheckbox}
         checked={props.checked}
+        location={props.location}
+        onChange={props.updateSaerchValue}
+        searchKeyword={props.searchKeyword}
       />
       <MoviesCardList
         movies={props.movies}
@@ -29,6 +45,7 @@ const SavedMovies = (props) => {
         savedMovies={props.savedMovies}
         onDeleteMovie={props.onDeleteMovie}
         isNotFound={props.isNotFound}
+        isServerError={props.isServerError}
       />
     </main>
   );

@@ -1,10 +1,18 @@
 import './SearchForm.css';
 import icon from '../../Images/search-blue.svg';
 import { FilterCheckbox } from '../FilterCheckbox/FilterCheckbox';
-
 import { useState, useEffect } from 'react';
 
-const SearchForm = ({ onCheckbox, checked, onSubmit, defaultValue }) => {
+const SearchForm = ({
+  onCheckbox,
+  checked,
+  onSubmit,
+  defaultValue,
+  location,
+  allMovies,
+  onChange,
+  searchKeyword,
+}) => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [keyword, setKeyword] = useState('');
   const [errorText, setErrorText] = useState('');
@@ -14,14 +22,22 @@ const SearchForm = ({ onCheckbox, checked, onSubmit, defaultValue }) => {
   }, [defaultValue]);
 
   const handleChange = (evt) => {
+    // if (location.pathname === '/saved-movies') {
+      onChange(evt.target.value);
+    // }
     setKeyword(evt.target.value);
     setIsFormValid(evt.target.closest('form').checkValidity());
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (keyword) {
-      onSubmit(keyword);
+    if (searchKeyword) {
+      onSubmit(allMovies);
+       if (location.pathname === '/saved-movies') {
+        onSubmit(allMovies);
+        } else {
+          onSubmit(searchKeyword)
+        }
     } else {
       return setErrorText('Нужно ввести ключевое слово');
     }
@@ -29,7 +45,7 @@ const SearchForm = ({ onCheckbox, checked, onSubmit, defaultValue }) => {
 
   return (
     <section className='search'>
-      <form className='search__form' onSubmit={handleSubmit} noValidate >
+      <form className='search__form' onSubmit={handleSubmit} noValidate>
         <div className='search__form-wrapper'>
           <input
             className='search__input'
@@ -38,7 +54,7 @@ const SearchForm = ({ onCheckbox, checked, onSubmit, defaultValue }) => {
             type='text'
             placeholder='Фильм'
             onChange={handleChange}
-            value={keyword || ''}
+            value={searchKeyword || ''}
             minLength='1'
             maxLength='20'
             required
