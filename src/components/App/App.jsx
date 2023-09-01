@@ -14,7 +14,6 @@ import { SavedMovies } from '../SavedMovies/SavedMovies';
 import * as mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
-// import { keyboard } from '@testing-library/user-event/dist/keyboard';
 import { useLocation } from 'react-router-dom';
 
 function App() {
@@ -43,8 +42,6 @@ function App() {
   const [initialMovies, setInitialMovies] = useState([]); // Список найденных фильмов
   const [foundMovies, setFoundMovies] = useState([]); // Список фильмов по критериям
   const [savedMovies, setSavedMovies] = useState([]); // Сохраненные фильмы
-  // const [allSavedMovies, setAllSavedMovies] = useState(savedMovies);
-  // const [filteredMovies, setFilteredMovies] = useState(allSavedMovies);
 
   // состояния для формы поиска фильмов
   const [selectedCheckbox, setSelectedCheckbox] = useState(false); // Флажок короткометражек не выбран
@@ -54,7 +51,6 @@ function App() {
   const [checkboxMovies, setCheckboxMovies] = useState(false);
 
   const [currentSavedMovies, setCurrentSavedMovies] = useState([]);
-  // const [currentMovies, setCurrentMovies] = useState([]);
 
   const navigate = useNavigate();
 
@@ -105,7 +101,6 @@ function App() {
         .getAllMovies()
         .then((movies) => {
           setIsLoading(false);
-          // localStorage.setItem('allMovies', JSON.stringify(movies)); // Записываем в сторедж все полученные фильмы с BeatfilmMoviesApi
           setIsServerError(false);
           setAllMovies(movies);
           handleSetFoundMovies(movies, selectedCheckbox); // Находим фильмы по запросу и выставленным критериям
@@ -126,48 +121,17 @@ function App() {
   const handleSetFoundMovies = (movies, checkbox) => {
     setIsLoading(true);
     const moviesList = findMovies(movies);
-    if (moviesList.length === 0) {
-      // console.log(1);
-      setIsNotFound(true);
-    } else {
-      // console.log(2);
-      setIsNotFound(false);
-    }
+
     setInitialMovies(moviesList);
     setFoundMovies(checkbox ? handleShortMovies(moviesList) : moviesList);
     console.log(foundMovies);
-    // localStorage.setItem('foundMovies', JSON.stringify(moviesList));
+
     setTimeout(() => setIsLoading(false), 1000);
   };
 
   useEffect(() => {
-    console.log(isNotFound)
-  }, [isNotFound])
-
-  // // находим фильмы по ключевому слову
-  // const findMovies = (movies) => {
-  //   let keyword = '';
-  //   let checkbox = '';
-
-  //   if (location.pathname === '/movies') {
-  //     keyword = localStorage.getItem('searchKeyword');
-  //     checkbox = localStorage.getItem('selectedCheckbox');
-  //   } else {
-  //     keyword = localStorage.getItem('searchKeywordSavedMovies');
-  //     checkbox = localStorage.getItem('checkboxSavedMovies');
-  //   }
-
-  //   if (keyword) {
-  //     const moviesКeywordSearch = movies.filter((movie) => {
-  //       return movie.nameRU.toLowerCase().includes(keyword.toLowerCase());
-  //     });
-  //     if (checkbox) {
-  //       return handleShortMovies(moviesКeywordSearch);
-  //     } else {
-  //       return moviesКeywordSearch;
-  //     }
-  //   }
-  // };
+    console.log(isNotFound);
+  }, [isNotFound]);
 
   // // находим фильмы по ключевому слову
   const findMovies = (movies, checkbox) => {
@@ -208,16 +172,15 @@ function App() {
     return movies.filter((movie) => movie.duration <= 40);
   };
 
-  // // Отслеживание состояние стэйта чекбокса
-  // useEffect(() => {
-  //   if (localStorage.getItem('checkboxSavedMovies') === 'true') {
-  //     setCheckboxSavedMovies(true);
-  //     // setSavedMovies(handleShortMovies(savedMovies));
-  //   } else {
-  //     setCheckboxSavedMovies(false);
-  //     // setSavedMovies(savedMovies);
-  //   }
-  // }, [localStorage.getItem('checkboxSavedMovies')]);
+  // Отслеживание состояние стэйта чекбокса
+  useEffect(() => {
+    if (localStorage.getItem('checkboxSavedMovies') === 'true') {
+      setCheckboxSavedMovies(true);
+    } else {
+      setCheckboxSavedMovies(false);
+      // setSavedMovies(savedMovies);
+    }
+  }, [localStorage.getItem('checkboxSavedMovies')]);
 
   const updateSaerchValue = (value) => {
     if (location.pathname === '/movies') {
@@ -229,37 +192,7 @@ function App() {
     }
   };
 
-  // // Меняем состояние чекбокса на короткометражки
-  // function handleChangeCheckboxSavedMovies() {
-  //   if (!checkboxSavedMovies) {
-  //     // setCheckboxSavedMovies(true);
-  //     // setAllSavedMovies(handleShortMovies(filteredMovies));
-  //     // if (handleShortMovies(filteredMovies).length === 0) {
-  //     //   setIsNotFound(true); //true
-  //     // }
-  //     // setIsNotFound(false); // false
-  //   } else {
-  //     // setCheckboxSavedMovies(false);
-  //     // if (filteredMovies.length === 0) {
-  //     //   setIsNotFound(true);
-  //     // }
-  //     // setIsNotFound(false);
-  //     // setAllSavedMovies(filteredMovies);
-  //   }
-  // }
-
-  // // // Поиск фильмов из сохраненных ранее по ключевому слову
-  // function handleSearchSavedMovies(keyword) {
-  //   if (findMovies(savedMovies).length === 0) {
-  //     setIsNotFound(true);
-  //   } else {
-  //     setIsNotFound(false);
-  //     setFilteredMovies(findMovies(savedMovies));
-  //     setAllSavedMovies(findMovies(savedMovies));
-  //   }
-  // }
-
-  // // Отслеживание состояния стэйтов
+  // Отслеживание состояния стэйтов
   useEffect(() => {
     setSearchKeywordMovies(localStorage.getItem('searchKeyword' || ''));
     setSearchKeywordSavedMovies(
@@ -282,83 +215,44 @@ function App() {
   React.useEffect(() => {
     setCurrentSavedMovies(savedMovies);
     updateCurrentSavedMovies(savedMovies);
-  }, [savedMovies]);
+  }, [savedMovies, checkboxSavedMovies]);
 
+  // console.log(location.pathname);
   React.useEffect(() => {
-    if (currentSavedMovies.length === 0 && !isServerError) {
-      setIsNotFound(true);
+    if (location.pathname === '/movies') {
+      if (foundMovies.length === 0 && !isServerError) {
+        setIsNotFound(true);
+      } else {
+        setIsNotFound(false);
+      }
     } else {
-      setIsNotFound(false);
+      if (currentSavedMovies.length === 0 && !isServerError) {
+        setIsNotFound(true);
+      } else {
+        setIsNotFound(false);
+      }
     }
-  }, [currentSavedMovies, isServerError]);
-
-  // React.useEffect(() => {
-  //   updateCurrentMovies(movies);
-  // }, [movies, checkboxMovies]);
-
-  // React.useEffect(() => {
-  //   updateCurrentSavedMovies(savedMovies);
-  // }, [savedMovies, checkboxSavedMovies]);
-
-  // const updateCurrentMovies = (movies) => {
-
-  //   if (checkboxSavedMovies) {
-  //     setCurrentMovies(handleShortMovies(movies));
-  //     // console.log(props.searchKeywordSavedMovies !== '')
-  //     if (searchKeywordSavedMovies) {
-
-  //       setCurrentMovies(handleShortMovies(handleSearchMovies(movies)))
-  //       // console.log(props.handleSearchMovies(currentSavedMovies))
-  //     }
-  //   } else {
-  //     setCurrentMovies(movies);
-  //     if (searchKeywordSavedMovies ) {
-
-  //       setCurrentMovies(handleSearchMovies(movies));
-  //       // console.log(props.handleSearchMovies(currentSavedMovies))
-  //     }
-  //   }
-  //   // }
-  //   // console.log(currentSavedMovies)
-  // };
+  }, [currentSavedMovies, isServerError, foundMovies, location.pathname]);
 
   const updateCurrentSavedMovies = (movies) => {
-    //   console.log(currentSavedMovies)
-    //   if (props.checkboxSavedMovies) {
-    //     setCurrentSavedMovies(props.handleShortMovies(props.movies));
-    //   } else {
-    //     setCurrentSavedMovies(props.movies);
-    //   }
-    // } else {
     if (checkboxSavedMovies) {
       setCurrentSavedMovies(handleShortMovies(movies));
-      // console.log(props.searchKeywordSavedMovies !== '')
       if (searchKeywordSavedMovies) {
         setCurrentSavedMovies(handleShortMovies(handleSearchMovies(movies)));
-        // console.log(props.handleSearchMovies(currentSavedMovies))
       }
     } else {
       setCurrentSavedMovies(movies);
       if (searchKeywordSavedMovies) {
         setCurrentSavedMovies(handleSearchMovies(movies));
-        // console.log(props.handleSearchMovies(currentSavedMovies))
       }
     }
-    // }
-    // console.log(currentSavedMovies)
   };
 
   // Меняем состояние чекбокса на короткометражки
   const handleChangeCheckbox = () => {
     setSelectedCheckbox(!selectedCheckbox);
-    // console.log(selectedCheckbox);
     if (!selectedCheckbox) {
       setFoundMovies(handleShortMovies(initialMovies));
-      if (foundMovies.length === 0) {
-        setIsNotFound(true);
-      } else {
-        setIsNotFound(false); //???
-      }
     } else {
       setFoundMovies(initialMovies);
     }
@@ -399,7 +293,7 @@ function App() {
     );
     if (!deleteCard) return;
     mainApi
-      .deleteMovie(deleteCard._id, jwt) //?
+      .deleteMovie(deleteCard._id, jwt)
       .then((removedMovie) => {
         setSavedMovies(savedMovies.filter((c) => c._id !== removedMovie._id));
         findMovies(savedMovies);
@@ -459,7 +353,6 @@ function App() {
 
   // // Проверяем токен пользователя и получение его контента
   const handleTokenCheck = () => {
-    // console.log(1)
     const token = localStorage.getItem('jwt');
     // if (!token) {
     //   return;
@@ -572,9 +465,7 @@ function App() {
               loggedIn={loggedIn}
               isSavedMovies={isSavedMovies}
               onDeleteMovie={handleDeleteMovie}
-              // savedMovies={savedMovies}
               onCheckbox={toggleCheckbox}
-              // handleSearchMovies={handleSearchMovies}
               checked={checkboxSavedMovies}
               allMovies={savedMovies}
               movies={currentSavedMovies}
@@ -583,7 +474,6 @@ function App() {
               location={location}
               isServerError={isServerError}
               handleShortMovies={handleShortMovies}
-              // checkboxSavedMovies={checkboxSavedMovies}
               searchKeyword={searchKeywordSavedMovies}
               updateSaerchValue={updateSaerchValue}
               setSearchKeyword={setSearchKeywordSavedMovies}
@@ -635,7 +525,6 @@ function App() {
             <NotFoundPage
               header={toggleHeader}
               footer={toggleFooter}
-              // onLogin={handleAuthorization}
               errorMessage={errorMessage}
             />
           }

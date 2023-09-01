@@ -66,9 +66,7 @@ const Register = (props) => {
           value={values.email || ''}
           error={errors.email || ''}
           onChange={handleChange}
-          // pattern='[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
-          // psttern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
-          pattern='^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$'          
+          pattern='^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$'
         />
 
         <AuthorizationField

@@ -22,9 +22,7 @@ const SearchForm = ({
   }, [defaultValue]);
 
   const handleChange = (evt) => {
-    // if (location.pathname === '/saved-movies') {
-      onChange(evt.target.value);
-    // }
+    onChange(evt.target.value);
     setKeyword(evt.target.value);
     setIsFormValid(evt.target.closest('form').checkValidity());
   };
@@ -33,11 +31,11 @@ const SearchForm = ({
     evt.preventDefault();
     if (searchKeyword) {
       onSubmit(allMovies);
-       if (location.pathname === '/saved-movies') {
+      if (location.pathname === '/saved-movies') {
         onSubmit(allMovies);
-        } else {
-          onSubmit(searchKeyword)
-        }
+      } else {
+        onSubmit(searchKeyword);
+      }
     } else {
       return setErrorText('Нужно ввести ключевое слово');
     }

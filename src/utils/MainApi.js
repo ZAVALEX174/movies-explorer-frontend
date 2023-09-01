@@ -32,19 +32,17 @@ export const getUserInfo = (token) => {
         method: 'GET',
         headers: {
             ...headers,
-            // 'Authorization': `Bearer ${token}`,
         },
     }).then((res) => checkResponse(res));
 };
 
 export const updateUserInfo = (data) => {
-    // const token = localStorage.getItem('jwt');
     return fetch(`${BASE_URL}/users/me`, {
         credentials: 'include',
         method: 'PATCH',
-        headers: {...headers,
-        // 'Authorization': `Bearer ${token}`
-    },
+        headers: {
+            ...headers,
+        },
         body: JSON.stringify({ name: data.name, email: data.email }),
     }).then((res) => checkResponse(res))
 };
@@ -56,7 +54,6 @@ export const saveMovie = (movie, jwt) => {
         method: 'POST',
         headers: {
             ...headers,
-            // 'Authorization': `Bearer ${jwt}`,
         },
         body: JSON.stringify({
             movieId: movie.id,
@@ -81,7 +78,6 @@ export const getSavedMovies = (jwt) => {
         method: 'GET',
         headers: {
             ...headers,
-            // 'Authorization': `Bearer ${jwt}`,
         }
     }).then((res) => checkResponse(res))
 };
@@ -93,7 +89,6 @@ export const deleteMovie = (id, jwt) => {
         method: 'DELETE',
         headers: {
             ...headers,
-            // 'Authorization': `Bearer ${jwt}`,
         },
     }).then((res) => checkResponse(res))
 };

@@ -1,5 +1,5 @@
 import './SavedMovies.css';
-import React, { useState } from 'react';
+import React from 'react';
 import { SearchForm } from '../SearchForm/SearchForm';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 
@@ -14,18 +14,6 @@ const SavedMovies = (props) => {
     toggleHeader();
     toggleFooter();
   }, []);
-
-  // React.useEffect(() => {
-  //   setCurrentSavedMovies(props.movies);
-
-  //   updateCurrentMovies();
-  // }, [props.movies]);
-
-  // React.useEffect(() => {
-  //   console.log(currentSavedMovies);
-  // }, [currentSavedMovies]);
-
-  // console.log(props.movies);
 
   return (
     <main className='saved-movies'>

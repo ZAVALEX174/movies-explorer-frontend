@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { useWindowSize } from '../Hooks/useWindowsSize';
 import {
   MAX_WIDTH_1161,
-  // MIDDLE_WIDTH_768,
   MIDDLE_WIDTH_730,
   MIDDLE_WIDTH_731,
   MIN_WIDTH_480,

@@ -4,7 +4,6 @@ import { AuthorizationForm } from '../AuthorizationForm/AuthorizationForm';
 import { AuthorizationField } from '../AuthorizationField/AuthorizationField';
 import { FormWindow } from '../FormWindow/FormWindow';
 
-
 const Login = (props) => {
   const { values, handleChange, resetForm, errors, isValid } =
     useFormAndValidation();
@@ -50,8 +49,6 @@ const Login = (props) => {
           value={values.email || ''}
           error={errors.email || ''}
           onChange={handleChange}
-          // pattern='[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
-          // pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
           pattern='^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$'
         />
         <AuthorizationField

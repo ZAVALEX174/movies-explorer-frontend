@@ -12,11 +12,11 @@ const MoviesCard = ({
   const location = useLocation();
 
   const handleSaveMovie = () => {
-    onSaveMovie(movie); 
+    onSaveMovie(movie);
   };
 
   const handleDeleteMovie = () => {
-    onDeleteMovie(movie); 
+    onDeleteMovie(movie);
   };
 
   return (
@@ -53,7 +53,8 @@ const MoviesCard = ({
           <button
             className='card__button card__button_saved'
             onClick={handleDeleteMovie}
-            type='button' />
+            type='button'
+          />
         ) : (
           <button
             className='card__button '

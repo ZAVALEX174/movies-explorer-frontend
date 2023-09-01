@@ -11,26 +11,17 @@ const SideBarNavigation = ({ onClose, isOpen }) => {
           <button type='button' className='popup__close' onClick={onClose} />
           <ul className='popup__list' onClick={onClose}>
             <li className='popup__item'>
-              <NavLink
-                to='/'
-                className='popup__link'
-                >
+              <NavLink to='/' className='popup__link'>
                 Главная
               </NavLink>
             </li>
             <li className='popup__item'>
-              <NavLink
-                to='/movies'
-                className='popup__link '
-                >
+              <NavLink to='/movies' className='popup__link '>
                 Фильмы
               </NavLink>
             </li>
             <li className='popup__item'>
-              <NavLink
-                to='/saved-movies'
-                className='popup__link '
-              >
+              <NavLink to='/saved-movies' className='popup__link '>
                 Сохранённые фильмы
               </NavLink>
             </li>

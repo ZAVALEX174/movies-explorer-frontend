@@ -42,7 +42,6 @@ const Movies = (props) => {
             isSavedMovies={props.isSavedMovies}
             savedMovies={props.savedMovies}
             onDeleteMovie={props.onDeleteMovie}
-
           />
         )}
       </main>

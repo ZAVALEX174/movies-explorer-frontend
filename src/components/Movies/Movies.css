@@ -4,13 +4,6 @@
   padding: 0 70px;
 }
 
-/* @media screen and (max-width: 900px) {
-  .movies {
-    padding-left: 30px;
-    padding-right: 30px;
-  }
-} */
-
 @media screen and (max-width: 768px) {
   .movies {
     padding-left: 30px;
