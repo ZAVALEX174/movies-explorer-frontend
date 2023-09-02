@@ -106,7 +106,6 @@ function App() {
           handleSetFoundMovies(movies, selectedCheckbox); // Находим фильмы по запросу и выставленным критериям
         })
         .catch((err) => {
-          // console.log(3)
           setIsServerError(true);
         })
         .finally(() => {
@@ -162,7 +161,6 @@ function App() {
           .toLowerCase()
           .includes(searchKeywordSavedMovies.toLowerCase());
       });
-      // console.log(newList)
       return newList;
     }
   };
@@ -178,7 +176,6 @@ function App() {
       setCheckboxSavedMovies(true);
     } else {
       setCheckboxSavedMovies(false);
-      // setSavedMovies(savedMovies);
     }
   }, [localStorage.getItem('checkboxSavedMovies')]);
 
@@ -192,13 +189,11 @@ function App() {
     }
   };
 
-  // Отслеживание состояния стэйтов
   useEffect(() => {
     setSearchKeywordMovies(localStorage.getItem('searchKeyword' || ''));
     setSearchKeywordSavedMovies(
       localStorage.getItem('searchKeywordSavedMovies' || '')
     );
-    // console.log(searchKeywordSavedMovies)
     setSelectedCheckbox(
       localStorage.getItem('selectedCheckbox' || '') === 'true'
     );
@@ -217,16 +212,23 @@ function App() {
     updateCurrentSavedMovies(savedMovies);
   }, [savedMovies, checkboxSavedMovies]);
 
-  // console.log(location.pathname);
   React.useEffect(() => {
     if (location.pathname === '/movies') {
-      if (foundMovies.length === 0 && !isServerError) {
+      if (
+        foundMovies.length === 0 &&
+        !isServerError &&
+        localStorage.getItem('searchKeyword')
+      ) {
         setIsNotFound(true);
       } else {
         setIsNotFound(false);
       }
     } else {
-      if (currentSavedMovies.length === 0 && !isServerError) {
+      if (
+        currentSavedMovies.length === 0 &&
+        !isServerError &&
+        localStorage.getItem('searchKeywordSavedMovies')
+      ) {
         setIsNotFound(true);
       } else {
         setIsNotFound(false);
@@ -266,7 +268,7 @@ function App() {
     );
   };
 
-  // // сохранение фильма на страницу "Сохраненные фильмы"
+  // сохранение фильма на страницу "Сохраненные фильмы"
   const handleSaveMovie = (movie) => {
     const jwt = localStorage.getItem('jwt');
     mainApi
@@ -283,7 +285,7 @@ function App() {
     setCheckboxSavedMovies(!checkboxSavedMovies);
   };
 
-  // // удаление фильма с страницы "Сохраненные фильмы"
+  // удаление фильма с страницы "Сохраненные фильмы"
   function handleDeleteMovie(movie) {
     const jwt = localStorage.getItem('jwt');
     const deleteCard = savedMovies.find(
@@ -297,14 +299,13 @@ function App() {
       .then((removedMovie) => {
         setSavedMovies(savedMovies.filter((c) => c._id !== removedMovie._id));
         findMovies(savedMovies);
-        // console.log(savedMovies);
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  // // Регистрация пользователя
+  // Регистрация пользователя
   const handleRegistration = ({ name, email, password }) => {
     mainApi
       .register({ name, email, password })
@@ -324,13 +325,12 @@ function App() {
       });
   };
 
-  // // Авторизация пользователя
+  // Авторизация пользователя
   const handleAuthorization = ({ email, password }) => {
     mainApi
       .authorize({ email, password })
       .then((res) => {
         if (res.token) {
-          // setLoggedIn(true);
           localStorage.setItem('jwt', res.token);
           handleTokenCheck();
           navigate('./movies');
@@ -351,7 +351,7 @@ function App() {
       });
   };
 
-  // // Проверяем токен пользователя и получение его контента
+  // Проверяем токен пользователя и получение его контента
   const handleTokenCheck = () => {
     const token = localStorage.getItem('jwt');
     // if (!token) {
@@ -377,11 +377,10 @@ function App() {
       .catch((err) => {
         console.log(err);
         setIsServerError(true);
-        // console.log(2)
       });
   };
 
-  // // Изменить данные пользователя в профиле
+  // Изменить данные пользователя в профиле
   const handleUpdateUserData = (data) => {
     const jwt = localStorage.getItem('jwt');
     mainApi
