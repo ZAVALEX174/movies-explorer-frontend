@@ -1,6 +1,18 @@
 import './MoviesCardList.css';
 import { MoviesCard } from '../MoviesCard/MoviesCard';
 import { useState, useEffect } from 'react';
+import { useWindowSize } from '../Hooks/useWindowsSize';
+import {
+  MAX_WIDTH_1161,
+  MIDDLE_WIDTH_730,
+  MIDDLE_WIDTH_731,
+  MIN_WIDTH_480,
+  INITIAL_CARDS_12,
+  INITIAL_CARDS_8,
+  IINITIAL_CARDS_5,
+  MORE_CARDS_3,
+  MORE_CARDS_2,
+} from '../../utils/constants';
 
 const MoviesCardList = ({
   movies,
@@ -13,11 +25,26 @@ const MoviesCardList = ({
 }) => {
   const [initialCards, setInitialCards] = useState({});
   const [moreCards, setMoreCards] = useState({});
+  const windowWidth = useWindowSize();
 
   useEffect(() => {
-    setInitialCards(5);
-    setMoreCards(2);
-  });
+    if (windowWidth >= MAX_WIDTH_1161) {
+      setInitialCards(INITIAL_CARDS_12);
+      setMoreCards(MORE_CARDS_3);
+    }
+    if (windowWidth < MAX_WIDTH_1161 && windowWidth >= MIDDLE_WIDTH_731) {
+      setInitialCards(INITIAL_CARDS_8);
+      setMoreCards(MORE_CARDS_2);
+    }
+    if (windowWidth <= MIDDLE_WIDTH_730 && windowWidth >= MIN_WIDTH_480) {
+      setInitialCards(IINITIAL_CARDS_5);
+      setMoreCards(MORE_CARDS_2);
+    }
+    if (windowWidth < MIN_WIDTH_480) {
+      setInitialCards(IINITIAL_CARDS_5);
+      setMoreCards(MORE_CARDS_2);
+    }
+  }, [windowWidth]);
 
   let classIsNotFound = isNotFound
     ? 'cards__missing_visible'

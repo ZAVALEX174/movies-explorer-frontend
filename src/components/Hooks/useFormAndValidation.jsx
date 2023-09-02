@@ -1,15 +1,19 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
+//хук управления формой
 const useFormAndValidation = () => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
+
   const handleChange = (event) => {
-    const { value, name } = event.target;
-    setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: event.target.validationMessage });
-    setIsValid(event.target.closest('form').checkValidity());
+    const target = event.target;
+    const value = event.target.value;
+    const name = event.target.name;
+    setValues({...values, [name]: value});
+    setErrors({...errors, [name]: target.validationMessage });
+    setIsValid(target.closest("form").checkValidity());
   };
 
   const resetForm = useCallback(
@@ -21,16 +25,7 @@ const useFormAndValidation = () => {
     [setValues, setErrors, setIsValid]
   );
 
-  return {
-    values,
-    handleChange,
-    errors,
-    isValid,
-    resetForm,
-    setErrors,
-    setValues,
-    setIsValid,
-  };
-};
+  return { values, handleChange, errors, isValid, resetForm, setErrors, setValues, setIsValid };
+}
 
 export { useFormAndValidation };

@@ -24,7 +24,7 @@ const Login = (props) => {
     if (!values.password || !values.email) {
       return;
     }
-    // props.onLogin(values);
+    props.onLogin(values);
     resetForm();
   }
 
@@ -43,13 +43,13 @@ const Login = (props) => {
           id='email'
           label='E-mail'
           name='email'
-          type='email'
+          type='text'
           required
           autoComplete='email'
           value={values.email || ''}
           error={errors.email || ''}
           onChange={handleChange}
-          pattern='[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
+          pattern='^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$'
         />
         <AuthorizationField
           id='password'

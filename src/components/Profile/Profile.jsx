@@ -10,7 +10,7 @@ const Profile = (props) => {
   const [isDisabledInput, setIsDisabledInput] = useState(true);
   const [isSuccessfully, setIsSuccessfully] = useState(false);
   const currentUser = useContext(CurrentUserContext);
-  const { values, errors, isValid, handleChange, setValues, resetForm } =
+  const { values, handleChange, errors, isValid, resetForm, setValues } =
     useFormAndValidation();
 
   const BlockedButton =
@@ -20,6 +20,27 @@ const Profile = (props) => {
   useEffect(() => {
     setValues(currentUser);
   }, [currentUser, setValues]);
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    props.onUpdateUserData({
+      name: values.name,
+      email: values.email,
+    });
+    setTimeout(() => {
+      setIsDisabledInput((state) => !state);
+      setIsSuccessfully((state) => !state);
+    }, 2000);
+    resetForm();
+  }
+
+  function handleUpdatProfile() {
+    setIsDisabledInput((state) => !state);
+  }
+
+  function handleSave() {
+    setIsSuccessfully((state) => !state);
+  }
 
   function toggleHeader() {
     props.header(true);
@@ -32,35 +53,13 @@ const Profile = (props) => {
     toggleFooter();
   }, []);
 
-  function handleSubmit(evt) {
-    evt.preventDefault();
-    props.onUpdateUserData({
-      name: values.name,
-      email: values.email,
-    });
-
-    setIsDisabledInput((state) => !state);
-    setIsSuccessfully((state) => !state);
-
-    resetForm();
-  }
-
-  function handleUpdatProfile() {
-    setIsDisabledInput((state) => !state);
-  }
-
-  function handleSave() {
-    setIsSuccessfully((state) => !state);
-  }
-
-  const defaultName = 'Александр';
-  const defaultEmail = 'zav01@ya.ru';
+  // const defaultName = 'Александр';
+  // const defaultEmail = 'zav01@ya.ru';
 
   return (
     <>
       <section className='profile'>
-        {/* <h2 className='profile__title'>Привет, {currentUser.name}!</h2> */}
-        <h2 className='profile__title'>Привет, Александр!</h2>
+        <h2 className='profile__title'>{`Привет, ${currentUser.name}!`}</h2>
         <form className='profile__form' onSubmit={handleSubmit}>
           <div className='profile__field'>
             <label className='profile__label'>Имя</label>
@@ -75,7 +74,8 @@ const Profile = (props) => {
               disabled={isDisabledInput}
               value={values?.name ?? currentUser.name}
               onChange={handleChange}
-              defaultValue={defaultName}
+              // defaultValue={defaultName}
+              pettern='/[A-Za-zа-яА-ЯёЁ0-9-\s]*/gm'
             />
           </div>
           {errors?.name && (
@@ -88,13 +88,15 @@ const Profile = (props) => {
               id='profile-email'
               className='profile__input'
               name='email'
-              type='email'
+              type='text'
               required
               disabled={isDisabledInput}
               value={values?.email ?? currentUser.email}
               onChange={handleChange}
-              pattern='[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
-              defaultValue={defaultEmail}
+              // pattern='[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
+              // pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
+              pattern='^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$'
+              // defaultValue={defaultEmail}
             />
           </div>
           {errors?.email && (

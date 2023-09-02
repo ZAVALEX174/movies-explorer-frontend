@@ -24,7 +24,7 @@ const Register = (props) => {
     if (!values.password || !values.email || !values.name) {
       return;
     }
-    // onRegister(values);
+    props.onRegister(values);
     resetForm();
   }
 
@@ -47,16 +47,18 @@ const Register = (props) => {
           minLength='2'
           maxLength='30'
           required
+          pettern='/[A-Za-zа-яА-ЯёЁ0-9-\s]*/gm'
           autoComplete='name'
           value={values.name || ''}
           error={errors.name || ''}
           onChange={handleChange}
         />
+
         <AuthorizationField
           id='email'
           label='E-mail'
           name='email'
-          type='email'
+          type='text'
           minLength='6'
           maxLength='40'
           required
@@ -64,8 +66,9 @@ const Register = (props) => {
           value={values.email || ''}
           error={errors.email || ''}
           onChange={handleChange}
-          pattern='[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
+          pattern='^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$'
         />
+
         <AuthorizationField
           id='password'
           label='Пароль'

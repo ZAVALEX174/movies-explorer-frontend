@@ -18,8 +18,8 @@
 
 .search__form-error {
   position: absolute;
-  left: 63px;
-  bottom: -10px;
+  left: 3px;
+  bottom: 55px;
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
@@ -97,7 +97,8 @@
 
 @media screen and (max-width: 550px) {
   .search__form-error {
-    left: 19px;
+    left: 0px;
+    bottom: -18px;
   }
 
   .search__input {
@@ -131,5 +132,9 @@
   .search__input {
     /* max-width: 440px; */
     height: 40px;
+  }
+
+  .search__form-error {
+    left: 4px;
   }
 }
